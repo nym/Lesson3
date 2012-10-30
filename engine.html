@@ -19,10 +19,64 @@
         </div>
       </div>
       <div id='ui'>
+        <h2>Texture</h2>
+        <div id='texture'>
+          <img id='texture_display' src='web/resources/textures/dart_tex.png' alt='texture' />
+        </div>
+        <div id='replace' class='button'>Replace Texture</div>
+        <br />
+        <h2>Model</h2>
+        <div id='cube_button' class='model_button'>
+          <img src='web/resources/ui/cube.png' alt='Cube' />
+        </div>
+        <div id='sphere_button' class='model_button'>
+          <img src='web/resources/ui/sphere.png' alt='Sphere' />
+        </div>
+        <div id='plane_button' class='model_button'>
+          <img src='web/resources/ui/plane.png' alt='Plane' />
+        </div>
+        <div id='cylinder_button' class='model_button'>
+          <img src='web/resources/ui/cylinder.png' alt='Cylinder' />
+        </div>
       </div>
     </div>
 
-      <!-- Dart Bootstrap -->
+    <!-- Modal dialog for uploading textures -->
+    <div id='texture_dialog' class='modal_dialog'>
+      <div>
+        <div id='dialog_header'>
+          <h3>Change Texture</h3>
+        </div>
+        <div id='dialog_left'>
+          <div id='upload_image' class='dialog_tab selected_tab'>Upload Image</div>
+          <div id='url_image' class='dialog_tab'>From URL</div>
+        </div>
+        <div id='dialog_right'>
+          <div id='dialog_content'>
+            <div id='upload_image_content' class='left_area'>
+              <div id='drop_image'>
+                <p>Drop texture file here</p>
+              </div>
+            </div>
+            <div id='url_image_content'>
+              <div>URL: <input type="text" id='url' /></div>
+              <div>
+                <br />
+                Only works if --disable-web-security is passed in and the texture is a power of 2<br /><br />
+                For Dartium goto Manage Launches and put --disable-web-security into the arguments box.<br /><br />
+                If there was a server involved the image should be downloaded and placed somehwere accessible.
+              </div>
+            </div>
+          </div>
+          <div id='dialog_buttons'>
+            <div id='texture_submit' class='submit_button'>Submit</div>
+            <div id='texture_cancel' class='cancel_button'>Cancel</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dart Bootstrap -->
     <script type="application/dart" src="web/main.dart"></script>
     <script src="http://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
   </body>
