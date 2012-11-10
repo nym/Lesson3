@@ -68,7 +68,7 @@ class Game
    * The camera is stationary in this lesson so an associated mat4
    * is not needed.
    */
-  Float32Array _viewProjectitonMatrixArray;
+  Float32Array _viewProjectionMatrixArray;
 
   //---------------------------------------------------------------------
   // Buffer variables
@@ -188,12 +188,9 @@ class Game
     _lastFrameTime = 0.0;
     _angle = 0.0;
 
-    // Create camera
-    _camera = new Camera();
-    // Set camera aspect ratio
-    _camera.aspectRatio = canvas.width.toDouble()/canvas.height.toDouble();
-    // Create a mouse keyboard camera controller
-    _cameraController = new MouseKeyboardCameraController();
+    // [FIXME] Create camera
+    // [FIXME] Set camera aspect ratio
+    // [FIXME] Create a mouse keyboard camera controller
     // Bind the controls for the camera
     _bindControls();
     _createTransforms();
@@ -294,11 +291,10 @@ class Game
    * Setup the camera transform
    */
   void _updateCameraTransform() {
-    mat4 viewProjectionMatrix = _camera.projectionMatrix;
-    mat4 viewMatrix = _camera.lookAtMatrix;
-    viewProjectionMatrix.multiply(viewMatrix);
-    // Copy into
-    viewProjectionMatrix.copyIntoArray(_viewProjectitonMatrixArray);
+    // [FIXME] Get camera projectionMatrix
+    // [FIXME] Get camera lookAtMatrix
+    // [FIXME] viewProjectionMatrix = projectionMatrix * lookAtMatrix;
+    // [FIXME] Copy viewProjectionMatrix into _viewProjectionMatrixArray.
   }
 
   /**
@@ -315,8 +311,8 @@ class Game
     // The camera is pointed at the origin.
     _camera.focusPosition = new vec3.raw(0.0, 0.0, 0.0);
 
-    _viewProjectitonMatrixArray = new Float32Array(16);
-    _updateCameraTransform();
+    _viewProjectionMatrixArray = new Float32Array(16);
+    _updateCameraTransform(); // This function doens't work yet. Fix it.
 
     // Create the model matrix
     // Center it at 0.0, 0.0, 0.0
@@ -441,8 +437,8 @@ class Game
     double dt = (time - _lastFrameTime) * 0.001;
     _lastFrameTime = time;
 
-    _cameraController.UpdateCamera(dt, _camera);
-    _updateCameraTransform();
+    // [FIXME] Update camera
+    // [FIXME] Update camera transform
 
     // Rotate the model
     double angle = dt * PI;
@@ -500,7 +496,7 @@ class Game
     // Set the shader program
     _context.setShaderProgram(_shaderProgram);
     _context.setUniformMatrix4('objectTransform', _modelMatrixArray);
-    _context.setUniformMatrix4('cameraTransform', _viewProjectitonMatrixArray);
+    _context.setUniformMatrix4('cameraTransform', _viewProjectionMatrixArray);
 
     // Set the texture
     _context.setTextures(0, [_texture]);
