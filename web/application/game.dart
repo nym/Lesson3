@@ -188,9 +188,15 @@ class Game
     _lastFrameTime = 0.0;
     _angle = 0.0;
 
-    // [FIXME] Create camera
-    // [FIXME] Set camera aspect ratio
-    // [FIXME] Create a mouse keyboard camera controller
+    // Create camera
+    _camera = new Camera();
+    
+    // Set camera aspect ratio
+    _camera.aspectRatio = canvas.width / canvas.height;
+    
+    // Create a mouse keyboard camera controller
+    _cameraController = new MouseKeyboardCameraController();
+    
     // Bind the controls for the camera
     _bindControls();
     _createTransforms();
@@ -291,10 +297,14 @@ class Game
    * Setup the camera transform
    */
   void _updateCameraTransform() {
-    // [FIXME] Get camera projectionMatrix
-    // [FIXME] Get camera lookAtMatrix
-    // [FIXME] viewProjectionMatrix = projectionMatrix * lookAtMatrix;
-    // [FIXME] Copy viewProjectionMatrix into _viewProjectionMatrixArray.
+    // Get camera projectionMatrix
+    mat4 projectionMatrix = _camera.projectionMatrix;
+    // Get camera lookAtMatrix
+    mat4 lookAtMatrix = _camera.lookAtMatrix;
+    // viewProjectionMatrix = projectionMatrix * lookAtMatrix;
+    mat4 viewProjectionMatrix = projectionMatrix * lookAtMatrix;
+    // Copy viewProjectionMatrix into _viewProjectionMatrixArray.
+    _viewProjectionMatrixArray = viewProjectionMatrix.copyAsArray();
   }
 
   /**
@@ -439,6 +449,7 @@ class Game
 
     // [FIXME] Update camera model.
     _updateCameraTransform();
+    _cameraController.UpdateCamera(dt, _camera);
 
     // Rotate the model
     double angle = dt * PI;
@@ -564,7 +575,7 @@ class Game
 
     _resourceManager.loadResource(textureResource);
   }
-
+  
   //---------------------------------------------------------------------
   // Static methods
   //---------------------------------------------------------------------
