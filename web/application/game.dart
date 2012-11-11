@@ -437,8 +437,8 @@ class Game
     double dt = (time - _lastFrameTime) * 0.001;
     _lastFrameTime = time;
 
-    // [FIXME] Update camera
-    // [FIXME] Update camera transform
+    // [FIXME] Update camera model.
+    _updateCameraTransform();
 
     // Rotate the model
     double angle = dt * PI;
